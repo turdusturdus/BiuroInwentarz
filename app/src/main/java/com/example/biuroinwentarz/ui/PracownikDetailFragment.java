@@ -36,6 +36,11 @@ public class PracownikDetailFragment extends Fragment {
         if (getArguments() != null) {
             pracownikId = getArguments().getInt("pracownikId", -1);
             if (pracownikId != -1) {
+                // Edytujemy istniejącego pracownika
+
+                // Ustawiamy przycisk usuwania jako widoczny
+                binding.buttonDelete.setVisibility(View.VISIBLE);
+
                 pracownikViewModel.getPracownikById(pracownikId).observe(getViewLifecycleOwner(), pracownik -> {
                     if (pracownik != null) {
                         binding.editTextImie.setText(pracownik.getImie());
@@ -43,9 +48,18 @@ public class PracownikDetailFragment extends Fragment {
                         binding.editTextStanowisko.setText(pracownik.getStanowisko());
                         binding.editTextEmail.setText(pracownik.getEmail());
                         binding.editTextTelefon.setText(pracownik.getTelefon());
+
+                        // Ustawiamy akcję kliknięcia przycisku usuwania
+                        binding.buttonDelete.setOnClickListener(v -> deletePracownik(pracownik));
                     }
                 });
+            } else {
+                // Dodajemy nowego pracownika
+                binding.buttonDelete.setVisibility(View.GONE);
             }
+        } else {
+            // Dodajemy nowego pracownika
+            binding.buttonDelete.setVisibility(View.GONE);
         }
 
         binding.buttonSave.setOnClickListener(v -> savePracownik());
@@ -76,6 +90,12 @@ public class PracownikDetailFragment extends Fragment {
             Toast.makeText(getContext(), "Zaktualizowano pracownika", Toast.LENGTH_SHORT).show();
         }
 
+        Navigation.findNavController(requireView()).navigateUp();
+    }
+
+    private void deletePracownik(Pracownik pracownik) {
+        pracownikViewModel.delete(pracownik);
+        Toast.makeText(getContext(), "Usunięto pracownika", Toast.LENGTH_SHORT).show();
         Navigation.findNavController(requireView()).navigateUp();
     }
 
