@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+
+
 android {
     namespace = "com.example.biuroinwentarz"
     compileSdk = 34
@@ -29,6 +31,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
 }
 
 dependencies {
@@ -45,6 +52,8 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     implementation(libs.lifecycle.extensions)
     implementation(libs.recyclerview)
-    implementation(libs.material.v190)
     testImplementation(libs.room.testing)
+
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }
