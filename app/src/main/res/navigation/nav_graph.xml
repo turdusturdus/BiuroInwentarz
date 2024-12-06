@@ -1,23 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragment_pracownik_list">
+    app:startDestination="@id/fragment_dashboard">
 
+    <!-- Dashboard Fragment -->
+    <fragment
+        android:id="@+id/fragment_dashboard"
+        android:name="com.example.biuroinwentarz.ui.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_dashboard_to_roomList"
+            app:destination="@id/fragment_pomieszczenie_list" />
+
+        <action
+            android:id="@+id/action_dashboard_to_employeeList"
+            app:destination="@id/fragment_pracownik_list" />
+
+        <action
+            android:id="@+id/action_dashboard_to_inventory"
+            app:destination="@id/fragment_inwentarz_list" />
+
+        <action
+            android:id="@+id/action_dashboard_to_orders"
+            app:destination="@id/fragment_orders_list" />
+
+        <action
+            android:id="@+id/action_dashboard_to_services"
+            app:destination="@id/fragment_services_list" />
+
+        <action
+            android:id="@+id/action_dashboard_to_addItem"
+            app:destination="@id/fragment_dodaj_przedmiot" />
+
+        <action
+            android:id="@+id/action_dashboard_to_addEmployee"
+            app:destination="@id/fragment_pracownik_detail" />
+    </fragment>
+
+    <!-- Pracownik List Fragment -->
     <fragment
         android:id="@+id/fragment_pracownik_list"
         android:name="com.example.biuroinwentarz.ui.PracownikListFragment"
-        android:label="Lista Pracowników"
+        android:label="@string/employee_list"
         tools:layout="@layout/fragment_pracownik_list">
         <action
             android:id="@+id/action_to_pracownik_detail"
             app:destination="@id/fragment_pracownik_detail" />
     </fragment>
 
+    <!-- Pracownik Detail Fragment -->
     <fragment
         android:id="@+id/fragment_pracownik_detail"
         android:name="com.example.biuroinwentarz.ui.PracownikDetailFragment"
-        android:label="Szczegóły Pracownika"
+        android:label="@string/employee_details"
         tools:layout="@layout/fragment_pracownik_detail" />
 
+    <!-- Pomieszczenie List Fragment -->
+    <fragment
+        android:id="@+id/fragment_pomieszczenie_list"
+        android:name="com.example.biuroinwentarz.ui.PomieszczenieListFragment"
+        android:label="@string/room_list"
+        tools:layout="@layout/fragment_pomieszczenie_list">
+        <!-- Define actions and arguments if necessary -->
+    </fragment>
+
+    <!-- Inwentarz List Fragment -->
+    <fragment
+        android:id="@+id/fragment_inwentarz_list"
+        android:name="com.example.biuroinwentarz.ui.InwentarzListFragment"
+        android:label="@string/inventory"
+        tools:layout="@layout/fragment_inwentarz_list">
+        <!-- Define actions and arguments if necessary -->
+    </fragment>
+
+    <!-- Orders List Fragment -->
+    <fragment
+        android:id="@+id/fragment_orders_list"
+        android:name="com.example.biuroinwentarz.ui.OrdersListFragment"
+        android:label="@string/orders"
+        tools:layout="@layout/fragment_orders_list">
+        <!-- Define actions and arguments if necessary -->
+    </fragment>
+
+    <!-- Services List Fragment -->
+    <fragment
+        android:id="@+id/fragment_services_list"
+        android:name="com.example.biuroinwentarz.ui.ServicesListFragment"
+        android:label="@string/services"
+        tools:layout="@layout/fragment_services_list">
+        <!-- Define actions and arguments if necessary -->
+    </fragment>
+
+    <!-- Add Item Fragment -->
+    <fragment
+        android:id="@+id/fragment_dodaj_przedmiot"
+        android:name="com.example.biuroinwentarz.ui.AddItemFragment"
+        android:label="@string/add_item"
+        tools:layout="@layout/fragment_add_item">
+        <!-- Define actions and arguments if necessary -->
+    </fragment>
 </navigation>

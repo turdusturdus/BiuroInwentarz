@@ -1,21 +1,29 @@
 package com.example.biuroinwentarz;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.biuroinwentarz.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
-    public ActivityMainBinding binding;
-    private static final String TAG = "MainActivity";
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ActivityMainBinding binding;
+    private DrawerLayout drawerLayout;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,24 +34,64 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        drawerLayout = binding.drawerLayout;
+        navigationView = binding.navigationView;
 
-        if (navHostFragment instanceof NavHostFragment) {
-            NavController navController = ((NavHostFragment) navHostFragment).getNavController();
-            NavigationUI.setupActionBarWithNavController(this, navController);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, binding.toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+            NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
         } else {
-            Log.e(TAG, "NavHostFragment not found. Ensure that the fragment with ID 'nav_host_fragment' exists in the layout.");
+            throw new IllegalStateException("NavHostFragment not found");
         }
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.fragment_dashboard,
+                R.id.fragment_pomieszczenie_list,
+                R.id.fragment_pracownik_list,
+                R.id.fragment_inwentarz_list,
+                R.id.fragment_orders_list,
+                R.id.fragment_services_list)
+                .setDrawerLayout(drawerLayout)
+                .build();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_dashboard) {
+            navController.navigate(R.id.fragment_dashboard);
+        } else if (itemId == R.id.nav_room_list) {
+            navController.navigate(R.id.fragment_pomieszczenie_list);
+        } else if (itemId == R.id.nav_employee_list) {
+            navController.navigate(R.id.fragment_pracownik_list);
+        } else if (itemId == R.id.nav_inventory) {
+            navController.navigate(R.id.fragment_inwentarz_list);
+        } else if (itemId == R.id.nav_orders) {
+            navController.navigate(R.id.fragment_orders_list);
+        } else if (itemId == R.id.nav_services) {
+            navController.navigate(R.id.fragment_services_list);
+        }
+
+        drawerLayout.closeDrawer(navigationView);
+        return true;
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        try {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            return navController.navigateUp() || super.onSupportNavigateUp();
-        } catch (IllegalStateException e) {
-            Log.e(TAG, "NavController not found in onSupportNavigateUp.", e);
-            return super.onSupportNavigateUp();
-        }
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }
