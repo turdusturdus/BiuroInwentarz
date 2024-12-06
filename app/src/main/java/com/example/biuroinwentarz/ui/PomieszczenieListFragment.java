@@ -19,8 +19,6 @@ public class PomieszczenieListFragment extends Fragment {
         binding = FragmentPomieszczenieListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Setup RecyclerView, Adapter, and ViewModel here
-
         return view;
     }
 

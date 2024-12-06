@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/fragment_dashboard">
 
-    <!-- Dashboard Fragment -->
     <fragment
         android:id="@+id/fragment_dashboard"
         android:name="com.example.biuroinwentarz.ui.DashboardFragment"
@@ -40,8 +39,6 @@
             android:id="@+id/action_dashboard_to_addEmployee"
             app:destination="@id/fragment_pracownik_detail" />
     </fragment>
-
-    <!-- Pracownik List Fragment -->
     <fragment
         android:id="@+id/fragment_pracownik_list"
         android:name="com.example.biuroinwentarz.ui.PracownikListFragment"
@@ -52,20 +49,16 @@
             app:destination="@id/fragment_pracownik_detail" />
     </fragment>
 
-    <!-- Pracownik Detail Fragment -->
     <fragment
         android:id="@+id/fragment_pracownik_detail"
         android:name="com.example.biuroinwentarz.ui.PracownikDetailFragment"
         android:label="@string/employee_details"
         tools:layout="@layout/fragment_pracownik_detail" />
-
-    <!-- Pomieszczenie List Fragment -->
     <fragment
         android:id="@+id/fragment_pomieszczenie_list"
         android:name="com.example.biuroinwentarz.ui.PomieszczenieListFragment"
         android:label="@string/room_list"
         tools:layout="@layout/fragment_pomieszczenie_list">
-        <!-- Define actions and arguments if necessary -->
     </fragment>
 
     <!-- Inwentarz List Fragment -->
@@ -74,33 +67,26 @@
         android:name="com.example.biuroinwentarz.ui.InwentarzListFragment"
         android:label="@string/inventory"
         tools:layout="@layout/fragment_inwentarz_list">
-        <!-- Define actions and arguments if necessary -->
     </fragment>
 
-    <!-- Orders List Fragment -->
     <fragment
         android:id="@+id/fragment_orders_list"
         android:name="com.example.biuroinwentarz.ui.OrdersListFragment"
         android:label="@string/orders"
         tools:layout="@layout/fragment_orders_list">
-        <!-- Define actions and arguments if necessary -->
     </fragment>
 
-    <!-- Services List Fragment -->
     <fragment
         android:id="@+id/fragment_services_list"
         android:name="com.example.biuroinwentarz.ui.ServicesListFragment"
         android:label="@string/services"
         tools:layout="@layout/fragment_services_list">
-        <!-- Define actions and arguments if necessary -->
     </fragment>
 
-    <!-- Add Item Fragment -->
     <fragment
         android:id="@+id/fragment_dodaj_przedmiot"
         android:name="com.example.biuroinwentarz.ui.AddItemFragment"
         android:label="@string/add_item"
         tools:layout="@layout/fragment_add_item">
-        <!-- Define actions and arguments if necessary -->
     </fragment>
 </navigation>

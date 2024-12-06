@@ -19,8 +19,6 @@ public class InwentarzListFragment extends Fragment {
         binding = FragmentInwentarzListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Setup RecyclerView, Adapter, and ViewModel here
-
         return view;
     }
 

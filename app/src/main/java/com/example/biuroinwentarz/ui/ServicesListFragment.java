@@ -19,8 +19,6 @@ public class ServicesListFragment extends Fragment {
         binding = FragmentServicesListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Setup RecyclerView, Adapter, and ViewModel here
-
         return view;
     }
 

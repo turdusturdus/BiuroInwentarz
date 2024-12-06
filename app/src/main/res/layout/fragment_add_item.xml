@@ -12,8 +12,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Add your input fields here -->
-
             <Button
                 android:id="@+id/buttonSaveItem"
                 android:layout_width="match_parent"

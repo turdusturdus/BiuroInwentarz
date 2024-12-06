@@ -36,9 +36,6 @@ public class PracownikDetailFragment extends Fragment {
         if (getArguments() != null) {
             pracownikId = getArguments().getInt("pracownikId", -1);
             if (pracownikId != -1) {
-                // Edytujemy istniejącego pracownika
-
-                // Ustawiamy przycisk usuwania jako widoczny
                 binding.buttonDelete.setVisibility(View.VISIBLE);
 
                 pracownikViewModel.getPracownikById(pracownikId).observe(getViewLifecycleOwner(), pracownik -> {
@@ -48,17 +45,13 @@ public class PracownikDetailFragment extends Fragment {
                         binding.editTextStanowisko.setText(pracownik.getStanowisko());
                         binding.editTextEmail.setText(pracownik.getEmail());
                         binding.editTextTelefon.setText(pracownik.getTelefon());
-
-                        // Ustawiamy akcję kliknięcia przycisku usuwania
                         binding.buttonDelete.setOnClickListener(v -> deletePracownik(pracownik));
                     }
                 });
             } else {
-                // Dodajemy nowego pracownika
                 binding.buttonDelete.setVisibility(View.GONE);
             }
         } else {
-            // Dodajemy nowego pracownika
             binding.buttonDelete.setVisibility(View.GONE);
         }
 

@@ -18,9 +18,6 @@ public class OrdersListFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentOrdersListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
-        // Setup RecyclerView, Adapter, and ViewModel here
-
         return view;
     }
 

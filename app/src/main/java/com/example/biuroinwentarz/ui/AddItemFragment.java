@@ -19,8 +19,6 @@ public class AddItemFragment extends Fragment {
         binding = FragmentAddItemBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Setup fields and save logic here
-
         return view;
     }
 

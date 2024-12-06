@@ -1,5 +1,4 @@
 <resources>
-    <!-- Existing strings -->
     <string name="app_name">BiuroInwentarz</string>
     <string name="full_name">%1$s %2$s</string>
     <string name="employee_position">Stanowisko: %1$s</string>
