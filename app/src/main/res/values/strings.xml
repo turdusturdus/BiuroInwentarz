@@ -25,4 +25,9 @@
     <string name="add_room">Dodaj Pomieszczenie</string>
     <string name="add_order">Dodaj Zamówienie</string>
     <string name="add_service">Dodaj Serwis</string>
+    <string name="room_name">Nazwa pomieszczenia</string>
+    <string name="floor_number">Piętro</string>
+    <string name="floor_number_display">Piętro: %1$d</string>
+    <string name="purpose">Przeznaczenie</string>
+    <string name="room_details">Szczegóły Pomieszczenia</string>
 </resources>

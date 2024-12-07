@@ -59,16 +59,16 @@
         android:name="com.example.biuroinwentarz.ui.PomieszczenieListFragment"
         android:label="@string/room_list"
         tools:layout="@layout/fragment_pomieszczenie_list">
+        <action
+            android:id="@+id/action_to_pomieszczenie_detail"
+            app:destination="@id/fragment_pomieszczenie_detail" />
     </fragment>
-
-    <!-- Inwentarz List Fragment -->
     <fragment
         android:id="@+id/fragment_inwentarz_list"
         android:name="com.example.biuroinwentarz.ui.InwentarzListFragment"
         android:label="@string/inventory"
         tools:layout="@layout/fragment_inwentarz_list">
     </fragment>
-
     <fragment
         android:id="@+id/fragment_orders_list"
         android:name="com.example.biuroinwentarz.ui.OrdersListFragment"
@@ -82,11 +82,15 @@
         android:label="@string/services"
         tools:layout="@layout/fragment_services_list">
     </fragment>
-
     <fragment
         android:id="@+id/fragment_dodaj_przedmiot"
         android:name="com.example.biuroinwentarz.ui.AddItemFragment"
         android:label="@string/add_item"
         tools:layout="@layout/fragment_add_item">
     </fragment>
+    <fragment
+        android:id="@+id/fragment_pomieszczenie_detail"
+        android:name="com.example.biuroinwentarz.ui.PomieszczenieDetailFragment"
+        android:label="@string/room_details"
+        tools:layout="@layout/fragment_pomieszczenie_detail" />
 </navigation>
