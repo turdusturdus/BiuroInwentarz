@@ -12,7 +12,7 @@ import java.util.Date;
                 @ForeignKey(entity = Pomieszczenie.class,
                         parentColumns = "id",
                         childColumns = "id_pomieszczenia",
-                        onDelete = ForeignKey.CASCADE),
+                        onDelete = ForeignKey.SET_NULL),
                 @ForeignKey(entity = Pracownik.class,
                         parentColumns = "id",
                         childColumns = "id_pracownika",
@@ -31,10 +31,11 @@ public class Inwentarz {
     private Date data_waznosci;
 
     @ColumnInfo(index = true)
-    private int id_pomieszczenia;
+    private Integer id_pomieszczenia;
 
     @ColumnInfo(index = true)
     private Integer id_pracownika;
+
     private int ilosc_obecna;
     private int ilosc_min;
 
@@ -49,6 +50,7 @@ public class Inwentarz {
         this.ilosc_obecna = ilosc_obecna;
         this.ilosc_min = ilosc_min;
     }
+
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }

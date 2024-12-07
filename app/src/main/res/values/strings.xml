@@ -30,4 +30,10 @@
     <string name="floor_number_display">Piętro: %1$d</string>
     <string name="purpose">Przeznaczenie</string>
     <string name="room_details">Szczegóły Pomieszczenia</string>
+    <string name="type">Typ</string>
+    <string name="current_quantity">Ilość obecna</string>
+    <string name="min_quantity">Ilość minimalna</string>
+    <string name="current_quantity_display">Ilość obecna: %1$d</string>
+    <string name="item_details">Szczegóły Przedmiotu</string>
+    <string name="room">Pomieszczenie</string>
 </resources>

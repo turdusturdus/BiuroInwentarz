@@ -68,7 +68,17 @@
         android:name="com.example.biuroinwentarz.ui.InwentarzListFragment"
         android:label="@string/inventory"
         tools:layout="@layout/fragment_inwentarz_list">
+
+        <action
+            android:id="@+id/action_to_inwentarz_detail"
+            app:destination="@id/fragment_inwentarz_detail" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment_inwentarz_detail"
+        android:name="com.example.biuroinwentarz.ui.InwentarzDetailFragment"
+        android:label="@string/item_details"
+        tools:layout="@layout/fragment_inwentarz_detail" />
     <fragment
         android:id="@+id/fragment_orders_list"
         android:name="com.example.biuroinwentarz.ui.OrdersListFragment"
