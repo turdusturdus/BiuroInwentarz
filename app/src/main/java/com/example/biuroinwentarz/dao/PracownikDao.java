@@ -28,4 +28,7 @@ public interface PracownikDao {
 
     @Query("SELECT * FROM pracownik WHERE id = :id")
     LiveData<Pracownik> getPracownikById(int id);
+
+    @Query("SELECT * FROM pracownik WHERE nazwisko LIKE '%' || :nazwisko || '%' ORDER BY nazwisko ASC")
+    LiveData<List<Pracownik>> getPracownicyByNazwisko(String nazwisko);
 }

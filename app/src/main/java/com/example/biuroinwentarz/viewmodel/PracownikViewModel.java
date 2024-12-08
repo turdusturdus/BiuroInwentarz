@@ -29,6 +29,10 @@ public class PracownikViewModel extends AndroidViewModel {
         return repository.getPracownikById(id);
     }
 
+    public LiveData<List<Pracownik>> getPracownicyByNazwisko(String nazwisko) {
+        return repository.getPracownicyByNazwisko(nazwisko);
+    }
+
     public void insert(Pracownik pracownik) {
         repository.insert(pracownik);
     }

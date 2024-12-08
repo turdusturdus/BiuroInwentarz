@@ -33,6 +33,10 @@ public class PracownikRepository {
         return pracownikDao.getPracownikById(id);
     }
 
+    public LiveData<List<Pracownik>> getPracownicyByNazwisko(String nazwisko) {
+        return pracownikDao.getPracownicyByNazwisko(nazwisko);
+    }
+
     public void insert(Pracownik pracownik) {
         executorService.execute(() -> pracownikDao.insert(pracownik));
     }
