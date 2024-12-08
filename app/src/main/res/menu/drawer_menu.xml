@@ -22,15 +22,5 @@
             android:id="@+id/nav_inventory"
             android:title="@string/inventory"
             android:icon="@drawable/ic_inventory"/>
-
-        <item
-            android:id="@+id/nav_orders"
-            android:title="@string/orders"
-            android:icon="@drawable/ic_orders"/>
-
-        <item
-            android:id="@+id/nav_services"
-            android:title="@string/services"
-            android:icon="@drawable/ic_services"/>
     </group>
 </menu>

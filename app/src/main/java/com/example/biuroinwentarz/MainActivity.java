@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    private NavigationView navigationView;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(binding.toolbar);
 
         drawerLayout = binding.drawerLayout;
-        navigationView = binding.navigationView;
+        navView = binding.navigationView;
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, binding.toolbar,
@@ -54,15 +54,13 @@ public class MainActivity extends AppCompatActivity
             throw new IllegalStateException("NavHostFragment not found");
         }
 
-        navigationView.setNavigationItemSelectedListener(this);
+        navView.setNavigationItemSelectedListener(this);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.fragment_dashboard,
                 R.id.fragment_pomieszczenie_list,
                 R.id.fragment_pracownik_list,
-                R.id.fragment_inwentarz_list,
-                R.id.fragment_orders_list,
-                R.id.fragment_services_list)
+                R.id.fragment_inwentarz_list)
                 .setDrawerLayout(drawerLayout)
                 .build();
     }
@@ -79,13 +77,9 @@ public class MainActivity extends AppCompatActivity
             navController.navigate(R.id.fragment_pracownik_list);
         } else if (itemId == R.id.nav_inventory) {
             navController.navigate(R.id.fragment_inwentarz_list);
-        } else if (itemId == R.id.nav_orders) {
-            navController.navigate(R.id.fragment_orders_list);
-        } else if (itemId == R.id.nav_services) {
-            navController.navigate(R.id.fragment_services_list);
         }
 
-        drawerLayout.closeDrawer(navigationView);
+        drawerLayout.closeDrawer(navView);
         return true;
     }
 

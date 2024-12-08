@@ -31,7 +31,7 @@ public class Inwentarz {
     private Date data_waznosci;
 
     @ColumnInfo(index = true)
-    private Integer id_pomieszczenia;
+    private int id_pomieszczenia;
 
     @ColumnInfo(index = true)
     private Integer id_pracownika;

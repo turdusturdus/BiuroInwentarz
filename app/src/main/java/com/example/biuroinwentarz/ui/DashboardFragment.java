@@ -32,12 +32,6 @@ public class DashboardFragment extends Fragment {
         binding.buttonInventory.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_dashboard_to_inventory));
 
-        binding.buttonOrders.setOnClickListener(v ->
-                Navigation.findNavController(v).navigate(R.id.action_dashboard_to_orders));
-
-        binding.buttonServices.setOnClickListener(v ->
-                Navigation.findNavController(v).navigate(R.id.action_dashboard_to_services));
-
         binding.buttonAddItem.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_dashboard_to_addItem));
 

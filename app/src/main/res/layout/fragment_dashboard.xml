@@ -33,22 +33,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/inventory"
                 android:layout_marginTop="8dp"/>
-
-            <Button
-                android:id="@+id/buttonOrders"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/orders"
-                android:layout_marginTop="8dp"/>
-
-            <Button
-                android:id="@+id/buttonServices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/services"
-                android:layout_marginTop="8dp"/>
-
-            <!-- Quick Actions -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -9,14 +9,12 @@ import android.content.Context;
 import com.example.biuroinwentarz.dao.PracownikDao;
 import com.example.biuroinwentarz.dao.PomieszczenieDao;
 import com.example.biuroinwentarz.dao.InwentarzDao;
-import com.example.biuroinwentarz.dao.SerwisDao;
 import com.example.biuroinwentarz.model.Pracownik;
 import com.example.biuroinwentarz.model.Pomieszczenie;
 import com.example.biuroinwentarz.model.Inwentarz;
-import com.example.biuroinwentarz.model.Serwis;
 import com.example.biuroinwentarz.model.Converters;
 
-@Database(entities = {Pracownik.class, Pomieszczenie.class, Inwentarz.class, Serwis.class}, version = 2)
+@Database(entities = {Pracownik.class, Pomieszczenie.class, Inwentarz.class}, version = 3)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -25,7 +23,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PracownikDao pracownikDao();
     public abstract PomieszczenieDao pomieszczenieDao();
     public abstract InwentarzDao inwentarzDao();
-    public abstract SerwisDao serwisDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {

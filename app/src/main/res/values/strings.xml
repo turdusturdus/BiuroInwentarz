@@ -15,16 +15,12 @@
     <string name="room_list">Lista pomieszczeń</string>
     <string name="employee_list">Lista pracowników</string>
     <string name="inventory">Zarządzanie inwentarzem</string>
-    <string name="orders">Obsługa zamówień</string>
-    <string name="services">Serwisy</string>
     <string name="quick_actions">Akcje Szybkie</string>
     <string name="add_item">Dodaj nowy przedmiot</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="employee_details">Szczegóły Pracownika</string>
     <string name="add_room">Dodaj Pomieszczenie</string>
-    <string name="add_order">Dodaj Zamówienie</string>
-    <string name="add_service">Dodaj Serwis</string>
     <string name="room_name">Nazwa pomieszczenia</string>
     <string name="floor_number">Piętro</string>
     <string name="floor_number_display">Piętro: %1$d</string>
