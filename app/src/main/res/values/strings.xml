@@ -36,4 +36,5 @@
     <string name="download_geolocation">Pobierz Geolokację</string>
     <string name="latitude">Latitude: %1$.6f</string>
     <string name="longitude">Longitude: %1$.6f</string>
+    <string name="about_us">o nas</string>
 </resources>

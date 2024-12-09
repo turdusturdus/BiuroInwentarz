@@ -1,7 +1,10 @@
 package com.example.biuroinwentarz;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -63,6 +66,17 @@ public class MainActivity extends AppCompatActivity
                 R.id.fragment_inwentarz_list)
                 .setDrawerLayout(drawerLayout)
                 .build();
+
+        // Handle About Us link
+        View aboutUsView = navView.findViewById(R.id.textViewAboutUs);
+        if (aboutUsView != null) {
+            aboutUsView.setOnClickListener(v -> {
+                String url = "https://www.android.com/";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            });
+        }
     }
 
     @Override
