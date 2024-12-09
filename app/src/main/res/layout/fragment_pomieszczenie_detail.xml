@@ -39,19 +39,12 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <Spinner
+                android:id="@+id/spinnerPrzeznaczenie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/purpose"
-                android:minHeight="48dp"
-                android:layout_marginTop="8dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPrzeznaczenie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp"/>
 
             <Button
                 android:id="@+id/buttonFetchGeolocation"
