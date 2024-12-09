@@ -14,7 +14,7 @@ import com.example.biuroinwentarz.model.Pomieszczenie;
 import com.example.biuroinwentarz.model.Inwentarz;
 import com.example.biuroinwentarz.model.Converters;
 
-@Database(entities = {Pracownik.class, Pomieszczenie.class, Inwentarz.class}, version = 3)
+@Database(entities = {Pracownik.class, Pomieszczenie.class, Inwentarz.class}, version = 4)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

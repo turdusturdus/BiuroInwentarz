@@ -1,8 +1,14 @@
 package com.example.biuroinwentarz.ui;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -13,17 +19,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.biuroinwentarz.R;
 import com.example.biuroinwentarz.databinding.FragmentPomieszczenieDetailBinding;
 import com.example.biuroinwentarz.model.Pomieszczenie;
 import com.example.biuroinwentarz.viewmodel.PomieszczenieViewModel;
 
 import java.util.Objects;
 
+import android.content.Context;
+import androidx.core.app.ActivityCompat;
+
 public class PomieszczenieDetailFragment extends Fragment {
 
     private FragmentPomieszczenieDetailBinding binding;
     private PomieszczenieViewModel pomieszczenieViewModel;
     private int pomieszczenieId = -1;
+
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,6 +61,10 @@ public class PomieszczenieDetailFragment extends Fragment {
                         binding.editTextPietro.setText(String.valueOf(pomieszczenie.getPietro()));
                         binding.editTextPrzeznaczenie.setText(pomieszczenie.getPrzeznaczenie());
                         binding.buttonDelete.setOnClickListener(v -> deletePomieszczenie(pomieszczenie));
+
+                        latitude = pomieszczenie.getLatitude();
+                        longitude = pomieszczenie.getLongitude();
+                        updateLocationDisplay();
                     }
                 });
             } else {
@@ -55,7 +76,53 @@ public class PomieszczenieDetailFragment extends Fragment {
 
         binding.buttonSave.setOnClickListener(v -> savePomieszczenie());
 
+        binding.buttonFetchGeolocation.setOnClickListener(v -> fetchGeolocation());
+
         return view;
+    }
+
+    private void fetchGeolocation() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            getCurrentLocation();
+        }
+    }
+
+    private void getCurrentLocation() {
+        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager != null) {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    updateLocationDisplay();
+                } else {
+                    locationListener = new LocationListener() {
+                        @Override
+                        public void onLocationChanged(@NonNull Location location) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                            updateLocationDisplay();
+                            locationManager.removeUpdates(this);
+                        }
+                    };
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                }
+            } else {
+                Toast.makeText(getContext(), "Brak uprawnień do pobrania lokalizacji", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void updateLocationDisplay() {
+        binding.textViewLatitude.setText(String.format(getString(R.string.latitude), latitude));
+        binding.textViewLongitude.setText(String.format(getString(R.string.longitude), longitude));
     }
 
     private void savePomieszczenie() {
@@ -76,7 +143,7 @@ public class PomieszczenieDetailFragment extends Fragment {
             return;
         }
 
-        Pomieszczenie pomieszczenie = new Pomieszczenie(nazwa, pietro, przeznaczenie);
+        Pomieszczenie pomieszczenie = new Pomieszczenie(nazwa, pietro, przeznaczenie, latitude, longitude);
 
         if (pomieszczenieId == -1) {
             pomieszczenieViewModel.insert(pomieszczenie);
@@ -94,6 +161,21 @@ public class PomieszczenieDetailFragment extends Fragment {
         pomieszczenieViewModel.delete(pomieszczenie);
         Toast.makeText(getContext(), "Usunięto pomieszczenie", Toast.LENGTH_SHORT).show();
         Navigation.findNavController(requireView()).navigateUp();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                Toast.makeText(getContext(), "Brak uprawnień do pobrania lokalizacji", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override

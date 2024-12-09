@@ -33,4 +33,7 @@
     <string name="item_details">Szczegóły Przedmiotu</string>
     <string name="room">Pomieszczenie</string>
     <string name="search_by_surname">Wyszukaj po nazwisku</string>
+    <string name="download_geolocation">Pobierz Geolokację</string>
+    <string name="latitude">Latitude: %1$.6f</string>
+    <string name="longitude">Longitude: %1$.6f</string>
 </resources>
