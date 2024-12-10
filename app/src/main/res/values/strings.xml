@@ -37,4 +37,21 @@
     <string name="latitude">Latitude: %1$.6f</string>
     <string name="longitude">Longitude: %1$.6f</string>
     <string name="about_us">o nas</string>
+    <string name="please_fill_all_fields">Proszę wprowadzić wszystkie pola</string>
+    <string name="please_select_room">Proszę wybrać pomieszczenie</string>
+    <string name="quantities_must_be_integers">Ilości muszą być liczbami całkowitymi</string>
+    <string name="item_added">Dodano przedmiot</string>
+    <string name="item_updated">Zaktualizowano przedmiot</string>
+    <string name="item_deleted">Usunięto przedmiot</string>
+    <string name="quantity_below_minimum">Ilość mniejsza niż minimalna: %1$s</string>
+    <string name="no_location_permission">Brak uprawnień do lokalizacji</string>
+    <string name="please_provide_name_and_floor">Proszę podać nazwę i piętro</string>
+    <string name="floor_must_be_integer">Piętro musi być liczbą całkowitą</string>
+    <string name="added_room">Dodano pomieszczenie</string>
+    <string name="updated_room">Zaktualizowano pomieszczenie</string>
+    <string name="deleted_room">Usunięto pomieszczenie</string>
+    <string name="please_provide_name_and_surname">Proszę podać imię i nazwisko</string>
+    <string name="added_employee">Dodano pracownika</string>
+    <string name="updated_employee">Zaktualizowano pracownika</string>
+    <string name="deleted_employee">Usunięto pracownika</string>
 </resources>

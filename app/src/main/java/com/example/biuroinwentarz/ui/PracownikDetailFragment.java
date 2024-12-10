@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.biuroinwentarz.R;
 import com.example.biuroinwentarz.databinding.FragmentPracownikDetailBinding;
 import com.example.biuroinwentarz.model.Pracownik;
 import com.example.biuroinwentarz.viewmodel.PracownikViewModel;
@@ -68,7 +69,7 @@ public class PracownikDetailFragment extends Fragment {
         String telefon = Objects.toString(binding.editTextTelefon.getText(), "").trim();
 
         if (TextUtils.isEmpty(imie) || TextUtils.isEmpty(nazwisko)) {
-            Toast.makeText(getContext(), "Proszę wprowadzić imię i nazwisko", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_provide_name_and_surname, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -76,11 +77,11 @@ public class PracownikDetailFragment extends Fragment {
 
         if (pracownikId == -1) {
             pracownikViewModel.insert(pracownik);
-            Toast.makeText(getContext(), "Dodano pracownika", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.added_employee, Toast.LENGTH_SHORT).show();
         } else {
             pracownik.setId(pracownikId);
             pracownikViewModel.update(pracownik);
-            Toast.makeText(getContext(), "Zaktualizowano pracownika", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.updated_employee, Toast.LENGTH_SHORT).show();
         }
 
         Navigation.findNavController(requireView()).navigateUp();
@@ -88,7 +89,7 @@ public class PracownikDetailFragment extends Fragment {
 
     private void deletePracownik(Pracownik pracownik) {
         pracownikViewModel.delete(pracownik);
-        Toast.makeText(getContext(), "Usunięto pracownika", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.deleted_employee, Toast.LENGTH_SHORT).show();
         Navigation.findNavController(requireView()).navigateUp();
     }
 

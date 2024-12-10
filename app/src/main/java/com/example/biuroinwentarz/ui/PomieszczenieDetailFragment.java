@@ -69,7 +69,7 @@ public class PomieszczenieDetailFragment extends Fragment {
                     if (isGranted) {
                         getCurrentLocation();
                     } else {
-                        Toast.makeText(getContext(), "Brak uprawnień do pobrania lokalizacji", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.no_location_permission, Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -190,7 +190,7 @@ public class PomieszczenieDetailFragment extends Fragment {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 }
             } else {
-                Toast.makeText(getContext(), "Brak uprawnień do pobrania lokalizacji", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.no_location_permission, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -205,31 +205,31 @@ public class PomieszczenieDetailFragment extends Fragment {
         String pietroStr = Objects.toString(binding.editTextPietro.getText(), "").trim();
         String przeznaczenie = spinnerPrzeznaczenie.getSelectedItem() != null ? spinnerPrzeznaczenie.getSelectedItem().toString().trim() : "";
         if (TextUtils.isEmpty(nazwa) || TextUtils.isEmpty(pietroStr)) {
-            Toast.makeText(getContext(), "Proszę wprowadzić nazwę i piętro", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_provide_name_and_floor, Toast.LENGTH_SHORT).show();
             return;
         }
         int pietro;
         try {
             pietro = Integer.parseInt(pietroStr);
         } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Piętro musi być liczbą całkowitą", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.floor_must_be_integer, Toast.LENGTH_SHORT).show();
             return;
         }
         Pomieszczenie pomieszczenie = new Pomieszczenie(nazwa, pietro, przeznaczenie, latitude, longitude);
         if (pomieszczenieId == -1) {
             pomieszczenieViewModel.insert(pomieszczenie);
-            Toast.makeText(getContext(), "Dodano pomieszczenie", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.added_room, Toast.LENGTH_SHORT).show();
         } else {
             pomieszczenie.setId(pomieszczenieId);
             pomieszczenieViewModel.update(pomieszczenie);
-            Toast.makeText(getContext(), "Zaktualizowano pomieszczenie", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.updated_room, Toast.LENGTH_SHORT).show();
         }
         Navigation.findNavController(requireView()).navigateUp();
     }
 
     private void deletePomieszczenie(Pomieszczenie pomieszczenie) {
         pomieszczenieViewModel.delete(pomieszczenie);
-        Toast.makeText(getContext(), "Usunięto pomieszczenie", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.deleted_room, Toast.LENGTH_SHORT).show();
         Navigation.findNavController(requireView()).navigateUp();
     }
 

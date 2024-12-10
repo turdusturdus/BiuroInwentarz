@@ -1,13 +1,11 @@
 package com.example.biuroinwentarz.ui;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.biuroinwentarz.R;
 import com.example.biuroinwentarz.databinding.FragmentInwentarzDetailBinding;
 import com.example.biuroinwentarz.model.Inwentarz;
 import com.example.biuroinwentarz.model.Pomieszczenie;
 import com.example.biuroinwentarz.utils.NotificationUtils;
 import com.example.biuroinwentarz.viewmodel.InwentarzViewModel;
 import com.example.biuroinwentarz.viewmodel.PomieszczenieViewModel;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -125,12 +123,12 @@ public class InwentarzDetailFragment extends Fragment {
         String iloscMinStr = Objects.toString(binding.editTextIloscMin.getText(), "").trim();
 
         if (TextUtils.isEmpty(nazwa) || TextUtils.isEmpty(typ) || TextUtils.isEmpty(iloscObecnaStr) || TextUtils.isEmpty(iloscMinStr)) {
-            Toast.makeText(getContext(), "Proszę wprowadzić wszystkie pola", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_fill_all_fields, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (selectedRoomId == -1) {
-            Toast.makeText(getContext(), "Proszę wybrać pomieszczenie", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_select_room, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -140,7 +138,7 @@ public class InwentarzDetailFragment extends Fragment {
             iloscObecna = Integer.parseInt(iloscObecnaStr);
             iloscMin = Integer.parseInt(iloscMinStr);
         } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Ilości muszą być liczbami całkowitymi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.quantities_must_be_integers, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -149,16 +147,16 @@ public class InwentarzDetailFragment extends Fragment {
         if (inwentarzId == -1) {
             inwentarzViewModel.insert(inwentarz);
             if (iloscObecna < iloscMin) {
-                NotificationUtils.sendNotification(requireContext(), "Ilość mniejsza niż minimalna: " + nazwa);
+                NotificationUtils.sendNotification(requireContext(), getString(R.string.quantity_below_minimum, nazwa));
             }
-            Toast.makeText(getContext(), "Dodano przedmiot", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.item_added, Toast.LENGTH_SHORT).show();
         } else {
             inwentarz.setId(inwentarzId);
             inwentarzViewModel.update(inwentarz);
             if (iloscObecna < iloscMin) {
-                NotificationUtils.sendNotification(requireContext(), "Ilość mniejsza niż minimalna: " + nazwa);
+                NotificationUtils.sendNotification(requireContext(), getString(R.string.quantity_below_minimum, nazwa));
             }
-            Toast.makeText(getContext(), "Zaktualizowano przedmiot", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.item_updated, Toast.LENGTH_SHORT).show();
         }
 
         NavController navController = Navigation.findNavController(requireView());
@@ -167,7 +165,7 @@ public class InwentarzDetailFragment extends Fragment {
 
     private void deleteInwentarz(Inwentarz inwentarz) {
         inwentarzViewModel.delete(inwentarz);
-        Toast.makeText(getContext(), "Usunięto przedmiot", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.item_deleted, Toast.LENGTH_SHORT).show();
         NavController navController = Navigation.findNavController(requireView());
         navController.navigateUp();
     }
