@@ -2,15 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
-
-
 android {
     namespace = "com.example.biuroinwentarz"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.biuroinwentarz"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -56,4 +54,6 @@ dependencies {
 
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    implementation(libs.work.runtime)
 }

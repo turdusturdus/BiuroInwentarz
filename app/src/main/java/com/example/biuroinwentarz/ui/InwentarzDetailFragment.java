@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.biuroinwentarz.databinding.FragmentInwentarzDetailBinding;
 import com.example.biuroinwentarz.model.Inwentarz;
 import com.example.biuroinwentarz.model.Pomieszczenie;
+import com.example.biuroinwentarz.utils.NotificationUtils;
 import com.example.biuroinwentarz.viewmodel.InwentarzViewModel;
 import com.example.biuroinwentarz.viewmodel.PomieszczenieViewModel;
 
@@ -33,7 +34,6 @@ public class InwentarzDetailFragment extends Fragment {
     private InwentarzViewModel inwentarzViewModel;
     private PomieszczenieViewModel pomieszczenieViewModel;
     private int inwentarzId = -1;
-
     private List<Pomieszczenie> pomieszczenieList;
     private int selectedRoomId = -1;
 
@@ -52,17 +52,14 @@ public class InwentarzDetailFragment extends Fragment {
             inwentarzId = getArguments().getInt("inwentarzId", -1);
             if (inwentarzId != -1) {
                 binding.buttonDelete.setVisibility(View.VISIBLE);
-
                 inwentarzViewModel.getInwentarzById(inwentarzId).observe(getViewLifecycleOwner(), inwentarz -> {
                     if (inwentarz != null) {
                         binding.editTextNazwa.setText(inwentarz.getNazwa());
                         binding.editTextTyp.setText(inwentarz.getTyp());
                         binding.editTextIloscObecna.setText(String.valueOf(inwentarz.getIlosc_obecna()));
                         binding.editTextIloscMin.setText(String.valueOf(inwentarz.getIlosc_min()));
-                        // Ustawienie wybranego pomieszczenia w spinnerze
                         selectedRoomId = inwentarz.getId_pomieszczenia();
                         setSpinnerSelection();
-
                         binding.buttonDelete.setOnClickListener(v -> deleteInwentarz(inwentarz));
                     }
                 });
@@ -94,7 +91,6 @@ public class InwentarzDetailFragment extends Fragment {
             adapter.clear();
             adapter.addAll(roomNames);
             adapter.notifyDataSetChanged();
-
             setSpinnerSelection();
         });
 
@@ -152,10 +148,16 @@ public class InwentarzDetailFragment extends Fragment {
 
         if (inwentarzId == -1) {
             inwentarzViewModel.insert(inwentarz);
+            if (iloscObecna < iloscMin) {
+                NotificationUtils.sendNotification(requireContext(), "Ilość mniejsza niż minimalna: " + nazwa);
+            }
             Toast.makeText(getContext(), "Dodano przedmiot", Toast.LENGTH_SHORT).show();
         } else {
             inwentarz.setId(inwentarzId);
             inwentarzViewModel.update(inwentarz);
+            if (iloscObecna < iloscMin) {
+                NotificationUtils.sendNotification(requireContext(), "Ilość mniejsza niż minimalna: " + nazwa);
+            }
             Toast.makeText(getContext(), "Zaktualizowano przedmiot", Toast.LENGTH_SHORT).show();
         }
 

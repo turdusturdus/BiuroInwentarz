@@ -34,4 +34,7 @@ public interface InwentarzDao {
 
     @Query("SELECT * FROM inwentarz WHERE id_pracownika = :id_pracownika")
     LiveData<List<Inwentarz>> getInwentarzByPracownik(int id_pracownika);
+
+    @Query("SELECT * FROM inwentarz")
+    List<Inwentarz> getRawAll();
 }
