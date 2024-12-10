@@ -2,12 +2,16 @@ package com.example.biuroinwentarz;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,6 +34,7 @@ import androidx.work.WorkManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,9 +45,16 @@ public class MainActivity extends AppCompatActivity
     private AppBarConfiguration appBarConfiguration;
     private NavigationView navView;
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
+    private Switch languageSwitch;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "app_prefs";
+    private static final String KEY_LANGUAGE = "language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String lang = sharedPreferences.getString(KEY_LANGUAGE, "pl");
+        setLocale(lang);
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -88,6 +100,19 @@ public class MainActivity extends AppCompatActivity
             });
         }
 
+        languageSwitch = navView.findViewById(R.id.languageSwitch);
+        if (languageSwitch != null) {
+            languageSwitch.setChecked(lang.equals("en"));
+            languageSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                String selectedLang = isChecked ? "en" : "pl";
+                if (!selectedLang.equals(sharedPreferences.getString(KEY_LANGUAGE, "pl"))) {
+                    sharedPreferences.edit().putString(KEY_LANGUAGE, selectedLang).apply();
+                    setLocale(selectedLang);
+                    recreate();
+                }
+            });
+        }
+
         requestNotificationPermission();
         scheduleDailyCheck();
     }
@@ -103,7 +128,7 @@ public class MainActivity extends AppCompatActivity
     private void scheduleDailyCheck() {
         Constraints constraints = new Constraints.Builder().build();
         PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(InwentarzCheckWorker.class, 24, java.util.concurrent.TimeUnit.HOURS)
-                .setInitialDelay(Duration.ofHours(calculateInitialDelay()))
+                .setInitialDelay(calculateInitialDelay(), java.util.concurrent.TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build();
         WorkManager.getInstance(this).enqueueUniquePeriodicWork("inwentarzCheckWork", androidx.work.ExistingPeriodicWorkPolicy.KEEP, workRequest);
@@ -143,5 +168,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }

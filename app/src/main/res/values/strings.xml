@@ -54,4 +54,5 @@
     <string name="added_employee">Dodano pracownika</string>
     <string name="updated_employee">Zaktualizowano pracownika</string>
     <string name="deleted_employee">Usunięto pracownika</string>
+    <string name="language_switch">PL/EN</string>
 </resources>
